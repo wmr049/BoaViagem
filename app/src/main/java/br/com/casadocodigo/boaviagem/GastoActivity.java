@@ -78,12 +78,7 @@ public class GastoActivity extends Activity {
 
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.remover:
-                return true;
-            default:
-                return super.onMenuItemSelected(featureId, item);
-        }
+        finish();
+        return true;
     }
 }

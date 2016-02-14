@@ -77,7 +77,7 @@
 
         <Button
             android:onClick="salvarViagem"
-            android:text="@string/salvar" />
+            android:text="@string/criar_nova_viagem" />
 
     </TableLayout>
 

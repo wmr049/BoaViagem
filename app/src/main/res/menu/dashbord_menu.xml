@@ -3,8 +3,7 @@
 
     <item
         android:id="@+id/sair"
-        android:icon=
-            "@android:drawable/ic_menu_close_clear_cancel"
+        android:icon= "@android:drawable/ic_menu_close_clear_cancel"
         android:title="@string/sair"/>
 
 </menu>
