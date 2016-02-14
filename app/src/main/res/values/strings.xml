@@ -26,6 +26,9 @@
     <string name="gastei">Gastei!</string>
     <string name="salvar">Cirar nova viagem</string>
     <string name="sair">Sair</string>
+    <string name="remover_viagem">Remover Viagem</string>
+    <string name="remover_gastos">Remover Gastos</string>
+
 
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
