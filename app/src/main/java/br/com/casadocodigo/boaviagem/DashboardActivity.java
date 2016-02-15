@@ -34,7 +34,7 @@ public class DashboardActivity extends Activity{
                 startActivity(new Intent(this, ViagemListActivity.class));
                 break;
             case R.id.configuracoes:
-                // ainda nao implementado
+                startActivity(new Intent(this, ConfiguracoesActivity.class));
                 break;
         }
     }
