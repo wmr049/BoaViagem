@@ -1,6 +1,7 @@
 package br.com.casadocodigo.boaviagem;
 
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import android.widget.SimpleAdapter;
+
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 
 import android.widget.Toast;
 
@@ -20,9 +24,12 @@ import java.util.Map;
 /**
  * Created by mreis on 14/02/2016.
  */
-public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener{
+public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener, OnClickListener{
 
     private List<Map<String, Object>> viagens;
+    private AlertDialog alertDialog;
+    private AlertDialog dialogConfirmacao;
+    private int viagemSelecionada;
 
     private List<Map<String, Object>> listarViagens() {
         viagens = new ArrayList<Map<String,Object>>();
@@ -52,6 +59,10 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         setListAdapter(adapter);
 
         getListView().setOnItemClickListener(this);
+
+        this.alertDialog = criaAlertDialog();
+        this.dialogConfirmacao = criaDialogConfirmacao();
+
     }
 
 
@@ -59,13 +70,56 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Map<String, Object> map = viagens.get(position);
-        String destino = (String) map.get("destino");
-        String mensagem = "Viagem selecionada: "+ destino;
-        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, GastoListActivity.class));
+        this.viagemSelecionada = position;
+        alertDialog.show();
 
     }
 
 
+    @Override
+    public void onClick(DialogInterface dialog, int item) {
+
+        switch (item) {
+            case 0:
+                startActivity(new Intent(this, ViagemActivity.class));
+                break;
+            case 1:
+                startActivity(new Intent(this, GastoActivity.class));
+                break;
+            case 2:
+                startActivity(new Intent(this,GastoListActivity.class));
+                break;
+            case 3:
+                dialogConfirmacao.show();
+                break;
+            case DialogInterface.BUTTON_POSITIVE:
+                viagens.remove(viagemSelecionada);
+                getListView().invalidateViews();
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                dialogConfirmacao.dismiss();
+                break;
+        }
+
+    }
+
+    private AlertDialog criaAlertDialog() {
+        final CharSequence[] items = {
+                getString(R.string.editar),
+                getString(R.string.novo_gasto),
+                getString(R.string.gastos_realizados),
+                getString(R.string.remover) };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.opcoes);
+        builder.setItems(items, this);
+        return builder.create();
+    }
+
+    private AlertDialog criaDialogConfirmacao() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.confirmacao_exclusao_viagem);
+        builder.setPositiveButton(getString(R.string.sim), this);
+        builder.setNegativeButton(getString(R.string.nao), this);
+        return builder.create();
+    }
 }

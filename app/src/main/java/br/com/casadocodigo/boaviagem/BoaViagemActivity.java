@@ -8,6 +8,8 @@ import android.view.ContextMenu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by mreis on 12/02/2016.
@@ -20,6 +22,7 @@ public class BoaViagemActivity extends Activity{
     @Override
     public void onCreate(Bundle savedIntanceState) {
         super.onCreate(savedIntanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.login);
 
         usuario = (EditText) findViewById(R.id.usuario);
