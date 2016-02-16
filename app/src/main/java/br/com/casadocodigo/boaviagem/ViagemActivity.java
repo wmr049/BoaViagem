@@ -173,8 +173,7 @@ public class ViagemActivity extends Activity {
         values.put("DATA_CHEGADA", dataChegada.getTime());
         values.put("DATA_SAIDA", dataSaida.getTime());
         values.put("ORCAMENTO", orcamento.getText().toString());
-        values.put("QUANTIDADE_PESSOAS",
-                quantidadePessoas.getText().toString());
+        values.put("QUANTIDADE_PESSOAS", quantidadePessoas.getText().toString());
 
         int tipo = radioGroup.getCheckedRadioButtonId();
 
