@@ -122,7 +122,7 @@ public class ViagemListActivity extends ListActivity implements
 
         Cursor cursor = db.rawQuery(
                 "SELECT SUM(valor) FROM gasto WHERE viagem_id = ?",
-                new String[]{ id }
+                new String[]{id}
         );
         cursor.moveToFirst();
         double total = cursor.getDouble(0);
@@ -179,6 +179,7 @@ public class ViagemListActivity extends ListActivity implements
                 intent = new Intent(this, ViagemActivity.class);
                 intent.putExtra(Constantes.VIAGEM_ID, id);
                 startActivity(intent);
+                break;
             case 1:
                 startActivity(new Intent(this, GastoActivity.class));
                 break;
@@ -188,14 +189,24 @@ public class ViagemListActivity extends ListActivity implements
             case 3:
                 dialogConfirmacao.show();
                 break;
-            case DialogInterface.BUTTON_POSITIVE:
+            case DialogInterface.BUTTON_POSITIVE: // exclusão
                 viagens.remove(viagemSelecionada);
+                removerViagem(id);
                 getListView().invalidateViews();
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
                 dialogConfirmacao.dismiss();
                 break;
         }
+    }
+
+    private void removerViagem(String id) {
+
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String where [] = new String[]{ id };
+        db.delete("gasto", "viagem_id = ?", where);
+        db.delete("viagem", "_id = ?", where);
     }
 
     @Override
