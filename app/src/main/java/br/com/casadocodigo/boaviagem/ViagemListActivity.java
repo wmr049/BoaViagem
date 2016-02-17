@@ -170,10 +170,15 @@ public class ViagemListActivity extends ListActivity implements
 
     @Override
     public void onClick(DialogInterface dialog, int item) {
+
+        Intent intent;
+        String id = (String) viagens.get(viagemSelecionada).get("id");
+
         switch (item) {
             case 0:
-                startActivity(new Intent(this, ViagemActivity.class));
-                break;
+                intent = new Intent(this, ViagemActivity.class);
+                intent.putExtra(Constantes.VIAGEM_ID, id);
+                startActivity(intent);
             case 1:
                 startActivity(new Intent(this, GastoActivity.class));
                 break;
