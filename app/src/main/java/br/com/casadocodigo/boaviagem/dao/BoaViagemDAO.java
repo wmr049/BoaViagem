@@ -86,7 +86,7 @@ public class BoaViagemDAO {
                 null, values);
     }
 
-    public boolean removerViagem(Long id){
+    public boolean removerViagem(String id){
         String whereClause = DatabaseHelper.Viagem._ID + " = ?";
         String[] whereArgs = new String[]{id.toString()};
         int removidos = getDb().delete(DatabaseHelper.Viagem.TABELA,
@@ -172,7 +172,7 @@ public class BoaViagemDAO {
     private Viagem criarViagem(Cursor cursor) {
         Viagem viagem = new Viagem(
 
-                (long) cursor.getInt(cursor.getColumnIndex(
+                cursor.getInt(cursor.getColumnIndex(
                         DatabaseHelper.Viagem._ID)),
 
                 cursor.getString(cursor.getColumnIndex(
