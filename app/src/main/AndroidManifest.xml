@@ -31,10 +31,21 @@
         <activity android:name=".GastoListActivity"/>
         <activity android:name=".ConfiguracoesActivity"/>
 
+        <provider
+            android:name=".provider.BoaViagemProvider"
+            android:authorities= "br.com.casadocodigo.boaviagem.provider">
+
+            <path-permission
+                android:path="viagem"
+                android:permission=
+                    "br.com.casadocodigo.boaviagem.provider.permission.ALL" />
+        </provider>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="cdc19e726c17193d5d63686b66ea51400c18c8bd" />
     </application>
+
 
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
